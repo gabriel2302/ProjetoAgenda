@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block titulo %}Cadastro | {% endblock %}
+{% block conteudo %}
+
+<h1 class="mt-5 mb-5">Cadastro de usuário</h1>
+
+
+<form method="POST" action="{% url 'cadastro' %}">
+    {% include 'parts/_messages.html' %}
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputNome">Nome</label>
+            <input type="text" value="{{ request.POST.nome }}" name="nome" class="form-control" id="inputNome">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputSobre">Sobrenome</label>
+            <input type="text" name="sobrenome" class="form-control" value="{{ request.POST.sobrenome }}"
+                id="inputSobre">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputEmail">Email</label>
+        <input type="email" name="email" class="form-control" value="{{ request.POST.email }}" id="inputEmail">
+    </div>
+    <div class="form-group">
+        <label for="inputUsuario">Usuário</label>
+        <input type="text" name="usuario" class="form-control" id="inputUsuario" value="{{ request.POST.usuario }}">
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputSenha">Senha</label>
+            <input type="password" name="senha" class="form-control" id="inputSenha">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputSenha2">Repita a senha</label>
+            <input type="password" name="senha2" class="form-control" id="inputSenha2">
+        </div>
+    </div>
+    <button type="button" data-toggle="modal" data-target="#exampleModalCenter"
+    class="btn btn-danger float-left">Cancelar</a></button>
+    <button type="submit" class="btn btn-primary float-right">Cadastrar</button>
+</form>
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Deseja cancelar o cadastro?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span class="text-danger">Sim</span> para cancelar e voltar para página de login, ou <span class="text-primary">Não</span> para permanecer na página
+            </div>
+            <div class="modal-footer">
+                    <a href="{% url 'login' %}"><button type="button" class="btn btn-danger">Sim</button></a>
+                <button type="button" class="btn btn-primary"  data-dismiss="modal">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

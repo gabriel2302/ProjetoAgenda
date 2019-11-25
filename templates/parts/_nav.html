@@ -1,0 +1,47 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand mr-0 mr-md-2" href="{% url 'index'%}">
+        <img src="{%static 'img/logoagendap.png'%}" height="25" width="35" height="">Agenda
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            {% if not user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'dashboard'%}">Contatos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">Logout</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Encerrar atividade</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Deseja mesmo encerrar sua sessão?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="{% url 'logout' %}"><button type="button" class="btn btn-danger">Sim</button></a>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
